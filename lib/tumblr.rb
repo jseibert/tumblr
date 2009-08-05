@@ -1,5 +1,8 @@
 require 'httparty'
 require 'active_support'
+require "rexml/document"
+require "tzinfo"
+require "time"
 
 require 'tumblr/user'
 require 'tumblr/request'
