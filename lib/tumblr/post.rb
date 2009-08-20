@@ -249,6 +249,20 @@ module Tumblr
       end
       return elt
     end
+    
+    def title
+      parts = caption.split("\n", 2)
+      title = parts[0]
+      if parts[1] && title && title.length < 90
+        return title
+      end
+      
+      nil
+    end
+    
+    def body
+      title ? caption.split("\n", 2)[1] : caption
+    end
   end
 
   class Link < Post
@@ -308,6 +322,8 @@ module Tumblr
   end
 
   class Video < Post
+    attr_accessor :caption
+    
     def initialize(elt, tz)
       super
       @caption = elt.elements["video-caption"].text
@@ -325,6 +341,20 @@ module Tumblr
       source = elt.add_element "video-source"
       source.text = @source
       return elt
+    end
+    
+    def title
+      parts = caption.split("\n", 2)
+      title = parts[0]
+      if parts[1] && title && title.length < 90
+        return title
+      end
+      
+      nil
+    end
+    
+    def body
+      title ? caption.split("\n", 2)[1] : caption
     end
   end
 end
